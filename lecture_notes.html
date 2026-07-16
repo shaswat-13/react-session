@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>lecture_notes.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="react-kss--presentation-script--todo-app-walkthrough">React KSS — Presentation Script &amp; Todo App Walkthrough</h1>
+<p>This file has two parts:</p>
+<ol>
+<li><strong>Presentation Script</strong> — for React, JSX, Components, Props, and useState, each broken into <strong>What / Why / Do's &amp; Don'ts / Use Case</strong></li>
+<li><strong>Todo App Walkthrough</strong> — a line-by-line explanation of each of the 5 build stages from the code examples file, so you can explain <em>why</em> each change was made, not just <em>what</em> changed</li>
+</ol>
+<hr>
+<h1 id="part-1--presentation-script">Part 1 — Presentation Script</h1>
+<hr>
+<h2 id="react">React</h2>
+<h3 id="what">What</h3>
+<p>React is a JavaScript library for building user interfaces out of small, reusable pieces called components. Instead of writing one giant page of HTML and JavaScript, you break the UI into independent chunks and combine them.</p>
+<h3 id="why">Why</h3>
+<ul>
+<li>Manually updating the DOM (the page) with plain JavaScript gets messy fast as an app grows — you end up tracking what changed and updating it by hand everywhere.</li>
+<li>React keeps a lightweight in-memory copy of the UI (the <strong>virtual DOM</strong>), figures out what actually changed, and updates only that part of the real page. This keeps things fast and predictable.</li>
+<li>Components can be reused anywhere, which keeps large codebases organized instead of turning into one massive file.</li>
+</ul>
+<h3 id="dos--donts">Do's &amp; Don'ts</h3>
+<p><strong>Do:</strong></p>
+<ul>
+<li>Think of your UI as a tree of small components, each responsible for one thing.</li>
+<li>Use function components (the modern, standard approach) — leave class components as a &quot;you might see this in old code&quot; mention.</li>
+</ul>
+<p><strong>Don't:</strong></p>
+<ul>
+<li>Don't try to explain the virtual DOM's internal diffing algorithm in depth — one sentence is enough for this audience.</li>
+<li>Don't get pulled into &quot;React vs. Angular vs. Vue&quot; debates during the session — redirect to Q&amp;A after, if it comes up.</li>
+</ul>
+<h3 id="use-case">Use Case</h3>
+<p>Any interactive interface where parts of the page need to update without a full page reload — social media feeds, dashboards, forms, todo apps, e-commerce product listings.</p>
+<p><strong>Script line:</strong> <em>&quot;React is a JavaScript library for building user interfaces out of reusable components. It keeps a lightweight copy of the page in memory, figures out exactly what changed, and updates only that part — so things stay fast even as the app grows.&quot;</em></p>
+<hr>
+<h2 id="jsx">JSX</h2>
+<h3 id="what-1">What</h3>
+<p>JSX (JavaScript XML) is a syntax extension that lets you write HTML-like code directly inside JavaScript. It's not a separate language — it compiles down to regular JavaScript function calls before it reaches the browser.</p>
+<h3 id="why-1">Why</h3>
+<ul>
+<li>Writing UI structure and the logic that drives it in the same place is easier to read and reason about than keeping them in separate files.</li>
+<li>It looks familiar to anyone who's touched HTML, which lowers the learning curve.</li>
+<li>Curly braces <code>{ }</code> let you drop back into plain JavaScript any time you need a variable, a calculation, or a function call inside your markup.</li>
+</ul>
+<h3 id="dos--donts-1">Do's &amp; Don'ts</h3>
+<p><strong>Do:</strong></p>
+<ul>
+<li>Always return a single root element (wrap siblings in a <code>&lt;div&gt;</code> or a Fragment <code>&lt;&gt;...&lt;/&gt;</code>).</li>
+<li>Use <code>className</code> instead of <code>class</code>.</li>
+<li>Use curly braces for any dynamic value.</li>
+</ul>
+<p><strong>Don't:</strong></p>
+<ul>
+<li>Don't spend time explaining Babel's internals — one line (&quot;a transpiler converts this into JavaScript the browser understands&quot;) is enough.</li>
+<li>Don't write raw HTML attribute names that clash with JS keywords (<code>class</code>, <code>for</code>) — use the React equivalents (<code>className</code>, <code>htmlFor</code>).</li>
+</ul>
+<h3 id="use-case-1">Use Case</h3>
+<p>Every single React component uses JSX to describe what should appear on screen — it's not optional, it's the default way you write UI in React.</p>
+<p><strong>Script line:</strong> <em>&quot;JSX lets us write HTML-like markup directly inside JavaScript. Behind the scenes, a tool called a transpiler converts it into plain JavaScript before the browser ever sees it. Curly braces are your escape hatch back into real JavaScript whenever you need it.&quot;</em></p>
+<hr>
+<h2 id="components">Components</h2>
+<h3 id="what-2">What</h3>
+<p>A component is a reusable, self-contained piece of UI — usually a JavaScript function that returns JSX. You define it once and use it anywhere, as many times as you like.</p>
+<h3 id="why-2">Why</h3>
+<ul>
+<li>Breaking a page into components (Header, Sidebar, Card, Footer) keeps code organized and each piece easy to understand on its own.</li>
+<li>Reusability means you write the UI once and use it in many places — change the definition, every usage updates.</li>
+<li>It mirrors how real interfaces are actually structured — most webpages are made of the same repeated pieces (cards, buttons, list items).</li>
+</ul>
+<h3 id="dos--donts-2">Do's &amp; Don'ts</h3>
+<p><strong>Do:</strong></p>
+<ul>
+<li>Keep components small and focused on one job.</li>
+<li>Give components clear, descriptive names (<code>UserCard</code>, not <code>Thing1</code>).</li>
+<li>Capitalize component names (<code>Greeting</code>, not <code>greeting</code>) — React uses this to tell components apart from regular HTML tags.</li>
+</ul>
+<p><strong>Don't:</strong></p>
+<ul>
+<li>Don't cram unrelated logic into one giant component — split it up.</li>
+<li>Don't forget to <code>export</code> a component if it's used in another file.</li>
+</ul>
+<h3 id="use-case-2">Use Case</h3>
+<p>Any repeated visual pattern — a product card shown 20 times on a shopping page, a comment shown for every user reply, a todo item shown for every task in a list.</p>
+<p><strong>Script line:</strong> <em>&quot;A component is a reusable piece of UI — usually a function that returns JSX. Think of it like a LEGO brick: you build one small piece with a clear purpose, then combine many of them to build the full page.&quot;</em></p>
+<hr>
+<h2 id="props">Props</h2>
+<h3 id="what-3">What</h3>
+<p>Props (&quot;properties&quot;) are how a parent component passes data down into a child component. They work like function arguments — the child receives them and uses them, but never changes them.</p>
+<h3 id="why-3">Why</h3>
+<ul>
+<li>Without props, every component would be static and identical every time it's used. Props are what make components flexible and reusable with different data.</li>
+<li>This keeps data flow predictable: data only ever moves <strong>one direction</strong> — parent to child — which makes bugs much easier to trace.</li>
+</ul>
+<h3 id="dos--donts-3">Do's &amp; Don'ts</h3>
+<p><strong>Do:</strong></p>
+<ul>
+<li>Destructure props in the function signature for readability: <code>function Greeting({ name }: GreetingProps)</code>.</li>
+<li>Define a TypeScript <code>interface</code> for your props so mistakes get caught while typing, not at runtime.</li>
+</ul>
+<p><strong>Don't:</strong></p>
+<ul>
+<li>Don't try to modify a prop's value inside the child component — props are read-only. If a value needs to change, that logic belongs in the parent (via state).</li>
+<li>Don't overload one component with excessive props — if you're passing 10+ props, consider splitting the component.</li>
+</ul>
+<h3 id="use-case-3">Use Case</h3>
+<p>A <code>Greeting</code> component that shows a different name for every user; a <code>ProductCard</code> that shows different prices, images, and titles depending on which product is passed in.</p>
+<p><strong>Script line:</strong> <em>&quot;Props are how a parent component hands data down to a child — just like arguments passed into a function. The child can use that data, but it can never change it directly. That one-way flow is what keeps React apps predictable.&quot;</em></p>
+<hr>
+<h2 id="usestate">useState</h2>
+<h3 id="what-4">What</h3>
+<p><code>useState</code> is a React Hook that lets a component create and manage its own piece of data — called <strong>state</strong> — that can change over time and cause the UI to update automatically when it does.</p>
+<h3 id="why-4">Why</h3>
+<ul>
+<li>Props are read-only and come from outside. But components often need to remember things and react to user actions — typing, clicking, toggling. That's what state is for.</li>
+<li>Calling the state's setter function is what tells React: &quot;this data changed, please re-render this component with the new value.&quot;</li>
+<li>Without state, every UI would be frozen the moment it renders — nothing could ever respond to a click or a keystroke.</li>
+</ul>
+<h3 id="dos--donts-4">Do's &amp; Don'ts</h3>
+<p><strong>Do:</strong></p>
+<ul>
+<li>Always update state using its setter function (<code>setCount</code>, <code>setText</code>), never assign to the variable directly.</li>
+<li>Keep each <code>useState</code> call focused on one piece of data — it's normal to have several <code>useState</code> calls in one component.</li>
+<li>Use the functional update form (<code>setCount(prev =&gt; prev + 1)</code>) when the new value depends on the old one.</li>
+</ul>
+<p><strong>Don't:</strong></p>
+<ul>
+<li>Don't mutate state directly (<code>count = count + 1</code>) — React won't know anything changed, and (in TypeScript) it usually won't even compile.</li>
+<li>Don't call <code>useState</code> (or any Hook) inside loops, conditions, or nested functions — only at the top level of a component.</li>
+</ul>
+<h3 id="use-case-4">Use Case</h3>
+<p>Anything that needs to change while the user interacts with the page: a counter, a like button, a character count as someone types, items in a todo list, form input values.</p>
+<p><strong>Script line:</strong> <em>&quot;<code>useState</code> gives a component memory. It returns two things: the current value, and a function to update it. Whenever you call that update function, React automatically re-renders the component with the new value — that's what makes the UI feel alive.&quot;</em></p>
+<hr>
+<h1 id="part-2--todo-app-walkthrough-5-stage-build-explained">Part 2 — Todo App Walkthrough (5-Stage Build Explained)</h1>
+<p>This matches the 5 code steps from the code-examples file. Read this section as your own prep notes — you don't need to say all of it verbatim, just enough to narrate what each line is doing as you type it live.</p>
+<hr>
+<h2 id="step-1--static-ui-only">Step 1 — Static UI Only</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">function</span> <span class="hljs-title function_">TodoApp</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>My Todo List<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Add a new task...&quot;</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>Add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Sample task 1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Sample task 2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">TodoApp</span>;
+</div></code></pre>
+<p><strong>What's happening:</strong></p>
+<ul>
+<li>This is pure JSX — no state, no logic, nothing is wired up yet.</li>
+<li>The <code>&lt;input&gt;</code> and <code>&lt;button&gt;</code> are sitting there doing nothing; typing into the input has no effect, and clicking the button does nothing.</li>
+<li>The two <code>&lt;li&gt;</code> items are hardcoded directly into the markup — there's no data behind them, just fixed text.</li>
+</ul>
+<p><strong>Why start here:</strong> It gives the audience a visual target — &quot;this is what we're building toward&quot; — before any logic is introduced. It also isolates JSX structure from behavior, so they're not trying to absorb both at once.</p>
+<hr>
+<h2 id="step-2--controlled-input-with-state">Step 2 — Controlled Input with State</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">TodoApp</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [inputValue, setInputValue] = useState&lt;<span class="hljs-built_in">string</span>&gt;(<span class="hljs-string">&quot;&quot;</span>);
+
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>My Todo List<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+        <span class="hljs-attr">value</span>=<span class="hljs-string">{inputValue}</span>
+        <span class="hljs-attr">onChange</span>=<span class="hljs-string">{(e)</span> =&gt;</span> setInputValue(e.target.value)}
+        placeholder=&quot;Add a new task...&quot;
+      /&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>Add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">TodoApp</span>;
+</div></code></pre>
+<p><strong>What changed and why:</strong></p>
+<ul>
+<li><code>const [inputValue, setInputValue] = useState&lt;string&gt;(&quot;&quot;)</code> creates a new piece of state, <code>inputValue</code>, starting as an empty string.</li>
+<li><code>value={inputValue}</code> binds the input's displayed text directly to our state — the input can no longer manage its own text internally; React state is now the single source of truth for what's inside it. This is called a <strong>controlled input</strong>.</li>
+<li><code>onChange={(e) =&gt; setInputValue(e.target.value)}</code> runs every time the user types a character. <code>e.target.value</code> is the current text inside the input at that moment; we immediately push it into state.</li>
+<li><strong>The loop to point out:</strong> state changes → React re-renders → input's <code>value</code> reflects the new state → user sees their own typing on screen. It looks instant, but it's actually this full cycle happening on every keystroke.</li>
+</ul>
+<p><strong>Why this step matters:</strong> It's the first time state visibly &quot;does something,&quot; and it introduces the controlled-input pattern that's used constantly in real forms.</p>
+<hr>
+<h2 id="step-3--todo-array-in-state--adding-items">Step 3 — Todo Array in State + Adding Items</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">Todo</span> {
+  <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>;
+  <span class="hljs-attr">text</span>: <span class="hljs-built_in">string</span>;
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">TodoApp</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [inputValue, setInputValue] = useState&lt;<span class="hljs-built_in">string</span>&gt;(<span class="hljs-string">&quot;&quot;</span>);
+  <span class="hljs-keyword">const</span> [todos, setTodos] = useState&lt;<span class="hljs-title class_">Todo</span>[]&gt;([]);
+
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleAddTodo</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">if</span> (inputValue.<span class="hljs-title function_">trim</span>() === <span class="hljs-string">&quot;&quot;</span>) <span class="hljs-keyword">return</span>;
+
+    <span class="hljs-keyword">const</span> <span class="hljs-attr">newTodo</span>: <span class="hljs-title class_">Todo</span> = {
+      <span class="hljs-attr">id</span>: <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>(),
+      <span class="hljs-attr">text</span>: inputValue,
+    };
+
+    <span class="hljs-title function_">setTodos</span>([...todos, newTodo]);
+    <span class="hljs-title function_">setInputValue</span>(<span class="hljs-string">&quot;&quot;</span>);
+  };
+
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>My Todo List<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+        <span class="hljs-attr">value</span>=<span class="hljs-string">{inputValue}</span>
+        <span class="hljs-attr">onChange</span>=<span class="hljs-string">{(e)</span> =&gt;</span> setInputValue(e.target.value)}
+        placeholder=&quot;Add a new task...&quot;
+      /&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleAddTodo}</span>&gt;</span>Add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">TodoApp</span>;
+</div></code></pre>
+<p><strong>What changed and why:</strong></p>
+<ul>
+<li><code>interface Todo</code> defines the <em>shape</em> of a single todo item — an <code>id</code> (number) and <code>text</code> (string). TypeScript will now warn us if we ever build a todo object incorrectly.</li>
+<li>A second state variable, <code>todos</code>, is introduced — an <strong>array</strong> of <code>Todo</code> objects, starting empty. This is the moment the component starts holding a real, growing collection of data.</li>
+<li><code>handleAddTodo</code> is a plain function, not a Hook — it's the logic that runs when the button is clicked.
+<ul>
+<li><code>if (inputValue.trim() === &quot;&quot;) return;</code> — a guard clause that stops empty or whitespace-only todos from being added. Worth explaining: <code>.trim()</code> removes leading/trailing spaces, so &quot; &quot; (just spaces) still counts as empty.</li>
+<li><code>id: Date.now()</code> — a quick, good-enough way to generate a unique number for each todo based on the current timestamp. Not production-grade for high-frequency inserts, but perfectly fine here and easy to explain.</li>
+<li><code>setTodos([...todos, newTodo])</code> — this is the most important line in this step. <code>...todos</code> <strong>spreads</strong> every existing todo into a brand-new array, and <code>newTodo</code> is added at the end. <strong>We never modify the old array directly</strong> (no <code>.push()</code>), because React needs a new array reference to detect that something changed and trigger a re-render.</li>
+<li><code>setInputValue(&quot;&quot;)</code> — clears the input box after adding, so it's ready for the next task.</li>
+</ul>
+</li>
+<li><code>onClick={handleAddTodo}</code> wires the button to actually run this function.</li>
+</ul>
+<p><strong>Why this step matters:</strong> It's the conceptual core of the whole app — turning a UI action (a click) into a state update that grows a list. Everything after this is just <em>displaying</em> that state.</p>
+<hr>
+<h2 id="step-4--rendering-the-list-with-map">Step 4 — Rendering the List with <code>.map()</code></h2>
+<pre class="hljs"><code><div>&lt;ul&gt;
+  {todos.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">todo</span>) =&gt;</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{todo.id}</span>&gt;</span>{todo.text}<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span>
+  ))}
+&lt;/ul&gt;
+</div></code></pre>
+<p><em>(full component combines this with everything from Step 3)</em></p>
+<p><strong>What changed and why:</strong></p>
+<ul>
+<li>Up to this point, <code>todos</code> existed in state but was never actually shown on screen — adding a todo &quot;worked&quot; invisibly. This step makes it visible.</li>
+<li><code>todos.map((todo) =&gt; (...))</code> walks through every object in the <code>todos</code> array and turns each one into a <code>&lt;li&gt;</code> element — this converts an array of <em>data</em> into an array of <em>JSX elements</em>, which is exactly what React needs to render a list.</li>
+<li><code>key={todo.id}</code> — <strong>required</strong> by React any time you render a list with <code>.map()</code>. React uses the key to track which item is which across re-renders, so it can update efficiently instead of re-drawing the entire list every time.
+<ul>
+<li>Worth a specific callout: <strong>never use the array index as the key if the list can reorder, filter, or have items removed</strong> — it causes React to mismatch items and can produce subtle bugs (wrong item highlighted, wrong item deleted, etc.). Since we generate a real unique <code>id</code> with <code>Date.now()</code>, we're already doing this the right way.</li>
+</ul>
+</li>
+<li><code>{todo.text}</code> displays the actual task text inside each list item.</li>
+</ul>
+<p><strong>Why this step matters:</strong> This is the payoff moment — the audience adds a task, hits Enter/clicks Add, and <em>sees</em> it appear in the list. It also directly reuses the <code>.map()</code> pattern from the JS refresher, so it should feel familiar rather than new.</p>
+<hr>
+<h2 id="step-5--marking-todos-complete">Step 5 — Marking Todos Complete</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">Todo</span> {
+  <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>;
+  <span class="hljs-attr">text</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">completed</span>: <span class="hljs-built_in">boolean</span>;
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">TodoApp</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [inputValue, setInputValue] = useState&lt;<span class="hljs-built_in">string</span>&gt;(<span class="hljs-string">&quot;&quot;</span>);
+  <span class="hljs-keyword">const</span> [todos, setTodos] = useState&lt;<span class="hljs-title class_">Todo</span>[]&gt;([]);
+
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleAddTodo</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">if</span> (inputValue.<span class="hljs-title function_">trim</span>() === <span class="hljs-string">&quot;&quot;</span>) <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">const</span> <span class="hljs-attr">newTodo</span>: <span class="hljs-title class_">Todo</span> = {
+      <span class="hljs-attr">id</span>: <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>(),
+      <span class="hljs-attr">text</span>: inputValue,
+      <span class="hljs-attr">completed</span>: <span class="hljs-literal">false</span>,
+    };
+    <span class="hljs-title function_">setTodos</span>([...todos, newTodo]);
+    <span class="hljs-title function_">setInputValue</span>(<span class="hljs-string">&quot;&quot;</span>);
+  };
+
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleToggle</span> = (<span class="hljs-params"><span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span></span>) =&gt; {
+    <span class="hljs-title function_">setTodos</span>(
+      todos.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">todo</span>) =&gt;</span>
+        todo.<span class="hljs-property">id</span> === id ? { ...todo, <span class="hljs-attr">completed</span>: !todo.<span class="hljs-property">completed</span> } : todo
+      )
+    );
+  };
+
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>My Todo List<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+        <span class="hljs-attr">value</span>=<span class="hljs-string">{inputValue}</span>
+        <span class="hljs-attr">onChange</span>=<span class="hljs-string">{(e)</span> =&gt;</span> setInputValue(e.target.value)}
+        placeholder=&quot;Add a new task...&quot;
+      /&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleAddTodo}</span>&gt;</span>Add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+
+      <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+        {todos.map((todo) =&gt; (
+          <span class="hljs-tag">&lt;<span class="hljs-name">li</span>
+            <span class="hljs-attr">key</span>=<span class="hljs-string">{todo.id}</span>
+            <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> handleToggle(todo.id)}
+            style={{
+              textDecoration: todo.completed ? &quot;line-through&quot; : &quot;none&quot;,
+              cursor: &quot;pointer&quot;,
+            }}
+          &gt;
+            {todo.text}
+          <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        ))}
+      <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">TodoApp</span>;
+</div></code></pre>
+<p><strong>What changed and why:</strong></p>
+<ul>
+<li><code>Todo</code> interface gains a <code>completed: boolean</code> field — every new todo now needs this property, which is why <code>handleAddTodo</code> sets <code>completed: false</code> when creating a new one.</li>
+<li><code>handleToggle(id: number)</code> is new. Walk through it carefully, it's the trickiest line in the whole build:
+<ul>
+<li><code>todos.map((todo) =&gt; todo.id === id ? { ...todo, completed: !todo.completed } : todo)</code></li>
+<li>This goes through <strong>every</strong> todo in the array, not just the one clicked.</li>
+<li>For the todo whose <code>id</code> matches the one clicked: build a <strong>new object</strong> (<code>{ ...todo, completed: !todo.completed }</code>) — spread all its existing fields, but flip <code>completed</code> to its opposite.</li>
+<li>For every other todo: <code>: todo</code> — leave it completely untouched, just return it as-is.</li>
+<li><code>setTodos(...)</code> replaces the whole array with this new one (some items changed, most didn't).</li>
+<li><strong>The key idea to emphasize:</strong> we never mutate the todo object directly (<code>todo.completed = true</code>) — we always build a new object and a new array. This &quot;immutability&quot; habit is one of the most important patterns in React and worth calling out explicitly, even to a beginner.</li>
+</ul>
+</li>
+<li><code>onClick={() =&gt; handleToggle(todo.id)}</code> on the <code>&lt;li&gt;</code> — clicking anywhere on a todo now triggers the toggle for that specific item's <code>id</code>.</li>
+<li><code>style={{ textDecoration: todo.completed ? &quot;line-through&quot; : &quot;none&quot; }}</code> — inline style that visually strikes through completed todos. This is a small, satisfying visual payoff that reinforces &quot;state changed → UI changed&quot; one more time.</li>
+<li><code>cursor: &quot;pointer&quot;</code> — a small UX touch, tells the user the list items are clickable (not required to explain, but nice to mention).</li>
+</ul>
+<p><strong>Why this step matters:</strong> It's the natural closing beat — everything from the whole session (components, JSX, props indirectly via <code>TodoItem</code> if you split it out, state, <code>.map()</code>, event handling) comes together in a working, clickable, complete mini-app.</p>
+<hr>
+<h2 id="closing-recap-say-this-after-step-5">Closing Recap (say this after Step 5)</h2>
+<p><em>&quot;Let's look at what's actually in this file: JSX to describe the structure, a component to contain it all, <code>useState</code> twice — once for the input, once for the todo list — a function that adds to that list without mutating it, <code>.map()</code> to turn that list into visible items, and an event handler that updates one specific item without touching the rest. Every concept from today is sitting in this one file, working together.&quot;</em></p>
+
+</body>
+</html>
